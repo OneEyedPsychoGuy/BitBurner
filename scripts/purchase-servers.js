@@ -2,8 +2,10 @@
 export async function main(ns) {
 
     //Set RAM here
-    const ram = ns.getPurchasedServerMaxRam();
+    const ram = 16384;
     let i = ns.getPurchasedServers().length;
+
+    ns.tprint(ram + ", " + ns.getPurchasedServerCost(ram));
 
     while (i < ns.getPurchasedServerLimit()) 
 	{
