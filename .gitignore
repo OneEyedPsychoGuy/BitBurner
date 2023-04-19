@@ -1,0 +1,6 @@
+# I have a backups folder that contains backup saves 
+# It is highly encouraged to backup saves often in case of corruption
+backups
+
+# I also have settings folder for the Bitburner VSCode Integration Extension
+.vscode

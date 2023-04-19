@@ -12,6 +12,8 @@ export async function main(ns) {
 		}
 	}
 
+	/*
 	const scriptName = "write-server-info.js"
 	ns.exec(scriptName, "home", 1, ...servers);
+	*/
 }
