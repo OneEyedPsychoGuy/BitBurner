@@ -1,5 +1,11 @@
 /** @param {NS} ns */
-export async function main(ns) {
+export function main(ns) {
+	ns.tprint("All: " + fetchAllServers(ns));
+	ns.tprint("Targets: " + fetchTargetServers(ns));
+	ns.tprint("Owned: " + fetchOwnedServers(ns));
+}
+
+export function fetchAllServers(ns) {
 	let servers = ["home"];
 
 	for (let server of servers) {
@@ -12,8 +18,13 @@ export async function main(ns) {
 		}
 	}
 
-	/*
-	const scriptName = "write-server-info.js"
-	ns.exec(scriptName, "home", 1, ...servers);
-	*/
+	return servers;
+}
+
+export function fetchTargetServers(ns) {
+	return fetchAllServers(ns).filter(server => !(server.startsWith("server") || server === "home"));
+}
+
+export function fetchOwnedServers(ns) {
+	return fetchAllServers(ns).filter(server => server.startsWith("server") || server === "home");
 }
