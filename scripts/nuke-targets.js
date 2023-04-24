@@ -3,10 +3,9 @@ import { fetchTargetServers } from "./fetch-servers";
 /** @param {NS} ns */
 export async function main(ns) 
 {
-	let targets = fetchTargetServers(ns);
-	for (let target of targets) 
+	for (let target of fetchTargetServers(ns)) 
 	{
-		if(ns.getHackingLevel() < ns.getServerRequiredHackingLevel(target) && ns.hasRootAccess(target)) { continue; }
+		if(ns.getHackingLevel() < ns.getServerRequiredHackingLevel(target) || ns.hasRootAccess(target)) continue;
 
 		let portsOpen = 0;
 
