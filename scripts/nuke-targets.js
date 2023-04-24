@@ -1,21 +1,9 @@
+import { fetchTargetServers } from "./fetch-servers";
+
 /** @param {NS} ns */
 export async function main(ns) 
 {
-	//Pulled from scan-servers.js
-	let servers = ["home"];
-
-	for (let server of servers) {
-		let scans = ns.scan(server);
-
-		for (let scan of scans) {
-			if (!servers.includes(scan)) {
-				servers.push(scan);
-			}
-		}
-	}
-	//End of scan-servers.js
-
-	let targets = servers.filter(server => !(server.startsWith("server") || server === "home"));
+	let targets = fetchTargetServers(ns);
 	for (let target of targets) 
 	{
 		if(ns.getHackingLevel() < ns.getServerRequiredHackingLevel(target) && ns.hasRootAccess(target)) { continue; }

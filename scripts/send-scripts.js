@@ -1,22 +1,9 @@
+import { fetchTargetServers, fetchOwnedServers } from "./fetch-servers";
+
 /** @param {NS} ns */
 export async function main(ns) {
-
-	//Pulled from scan-servers.js
-	let servers = ["home"];
-
-	for (let server of servers) {
-		let scans = ns.scan(server);
-
-		for (let scan of scans) {
-			if (!servers.includes(scan)) {
-				servers.push(scan);
-			}
-		}
-	}
-	//End of scan-servers.js
-
 	//Send and execute hack scripts to targets
-	let targets = servers.filter(server => !(server.startsWith("server") || server === "home"));
+	let targets = fetchTargetServers(ns);
 	const filename = "basic-hack.js";
 
 	for(let target of targets)
@@ -31,11 +18,11 @@ export async function main(ns) {
 		ns.exec(filename, target, threads);
 	}
 
-	//Semd amd execute share scripts owned servers
-	let owns = servers.filter(server => server.startsWith("server") || server === "home");
+	//Send and execute share scripts owned servers
+	let owned = fetchOwnedServers(ns);
 	const filename2 = "trivial-share.js";
 	
-	for(let own of owns) {
+	for(let own of owned) {
 		if(own === "home") { continue; }
 
 		let threads = Math.floor(ns.getServerMaxRam(own) / ns.getScriptRam(filename2, "home"));
