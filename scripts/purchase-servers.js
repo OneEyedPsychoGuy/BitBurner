@@ -11,7 +11,7 @@ export async function main(ns) {
 	{
         if (ns.getServerMoneyAvailable("home") > ns.getPurchasedServerCost(ram)) 
 		{
-			ns.purchaseServer("server-node-" + i, ram)
+			ns.purchaseServer("pserv-" + i, ram)
             ++i;
         }
         //Prevents Bitburner from freezing
